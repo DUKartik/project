@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>CHATBOT</h1>
+    </header>
+
+    <!-- Main Chat Area -->
+    <main id="chat-container">
+        {% for dictonary in chat_history %}
+            <div class="chat-message {{ dictonary.sender }}">
+                <p>{{ dictonary.message }}</p>
+            </div>
+        {% endfor %}
+    </main>
+    
+    <!-- Footer - Input Area -->
+    <footer>
+        <form method="POST" action="/" id="chat-form">
+            <input type="text" name="user_message" placeholder="Type your message..." required autocomplete="off">
+            <button type="submit">Send</button>
+        </form>
+    </footer>
+
+    <script>
+        // Auto-scroll to bottom function
+        function scrollToBottom() {
+            const chatContainer = document.getElementById('chat-container');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Scroll to bottom when page loads
+        window.onload = scrollToBottom;
+
+        // Scroll to bottom after form submission
+        document.getElementById('chat-form').addEventListener('submit', function() {
+            // Small timeout to allow the new message to be added to the DOM
+            setTimeout(scrollToBottom, 50);
+        });
+
+        // Alternative: MutationObserver to detect new messages (more reliable)
+        const observer = new MutationObserver(function(mutations) {
+            scrollToBottom();
+        });
+
+        observer.observe(document.getElementById('chat-container'), {
+            childList: true,
+            subtree: true
+        });
+    </script>
+</body>
+</html>

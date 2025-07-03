@@ -1,0 +1,246 @@
+/* ====== Base Styles ====== */
+:root {
+    --primary: #4a6cf7;
+    --primary-dark: #3a5ce4;
+    --text-primary: #f8f9fa;
+    --text-secondary: #e9ecef;
+    --bg-gradient: linear-gradient(135deg, #6e8efb, #4a6cf7);
+    --card-bg: rgba(255, 255, 255, 0.08);
+    --card-border: rgba(255, 255, 255, 0.12);
+    --input-bg: rgba(255, 255, 255, 0.12);
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    background: var(--bg-gradient);
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* ====== Typography ====== */
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+  }
+  
+  /* ====== Layout Components ====== */
+  header {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 1.25rem 2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--card-border);
+    z-index: 10;
+  }
+  
+  main {
+    flex: 1;
+    padding: 1.5rem 2rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    scroll-behavior: smooth;
+  }
+  
+  footer {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 1.25rem 2rem;
+    border-top: 1px solid var(--card-border);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  /* ====== Chat Messages ====== */
+  .chat-message {
+    max-width: 85%;
+    padding: 1rem 1.25rem;
+    border-radius: 1.25rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    animation: fadeIn 0.3s ease-out forwards;
+    opacity: 0;
+    transform: translateY(8px);
+    will-change: transform, opacity;
+  }
+  
+  .chat-message.bot {
+    background: var(--card-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--card-border);
+    align-self: flex-start;
+    border-bottom-left-radius: 0.25rem;
+  }
+  
+  .chat-message.user {
+    background: var(--primary);
+    align-self: flex-end;
+    border-bottom-right-radius: 0.25rem;
+    box-shadow: 0 4px 12px rgba(74, 108, 247, 0.25);
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* ====== Form Elements ====== */
+  .input-group {
+    flex: 1;
+    position: relative;
+    display: flex;
+  }
+  
+  input[type="text"] {
+    flex: 1;
+    padding: 0.875rem 1.25rem;
+    border: 1px solid var(--card-border);
+    border-radius: 2rem;
+    font-size: 0.9375rem;
+    background: var(--input-bg);
+    color: var(--text-primary);
+    outline: none;
+    transition: var(--transition);
+    caret-color: var(--primary);
+  }
+  
+  input[type="text"]:focus {
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.2);
+  }
+  
+  input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  button {
+    padding: 0.875rem 1.75rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 2rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+  }
+  
+  button:active {
+    transform: translateY(0);
+  }
+  
+  /* ====== Scrollbar ====== */
+  main::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  main::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  main::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+  }
+  
+  main::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  /* ====== Responsive Adjustments ====== */
+  @media (max-width: 768px) {
+    header, footer {
+      padding: 1rem;
+    }
+    
+    main {
+      padding: 1rem;
+    }
+    
+    .chat-message {
+      max-width: 90%;
+      padding: 0.75rem 1rem;
+    }
+    
+    input[type="text"], button {
+      padding: 0.75rem 1rem;
+    }
+  }
+  
+  /* ====== Micro-interactions ====== */
+  .chat-message.user {
+    transition: transform 0.2s ease;
+  }
+  
+  .chat-message.user:hover {
+    transform: translateX(-4px);
+  }
+  
+  .chat-message.bot {
+    transition: transform 0.2s ease;
+  }
+  
+  .chat-message.bot:hover {
+    transform: translateX(4px);
+  }
+  
+  /* ====== Loading Animation ====== */
+  .typing-indicator {
+    display: flex;
+    padding: 1rem 1.25rem;
+    background: var(--card-bg);
+    border-radius: 1.25rem;
+    align-self: flex-start;
+    margin-bottom: 1rem;
+  }
+  
+  .typing-indicator span {
+    height: 8px;
+    width: 8px;
+    background: var(--text-secondary);
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 2px;
+    animation: bounce 1.5s infinite ease-in-out;
+  }
+  
+  .typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  
+  @keyframes bounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-5px); }
+  }

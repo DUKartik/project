@@ -1,0 +1,34 @@
+body{
+    margin: 0;
+    text-align: center;
+}
+
+form{
+    margin: 20px;
+    padding: 40px;
+    align-items: center;
+}
+
+header{
+    display: flex;
+    background-color: aqua;
+    justify-content: center;
+}
+#height{
+    height: 30px;
+    border-radius: 10px;
+    margin: 10px;
+    text-align: center;
+}
+#weight{
+    height: 30px;
+    border-radius: 10px;
+    margin: 10px;
+    text-align: center;
+}
+
+#calculate{
+    padding: 10px;
+    font-style:oblique solid bold;
+    margin: 10px;
+}
